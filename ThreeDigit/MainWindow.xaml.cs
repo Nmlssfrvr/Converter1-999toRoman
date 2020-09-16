@@ -75,6 +75,8 @@ namespace ThreeDigit
             Rim.Text = "";
             List<string> str = new List<string>();
             str.AddRange(Rus.Text.ToLower().Split(' '));
+            while (str.Contains(""))
+                str.Remove("");
             if (str.Count > 3)
             {
                 Rim.Text = "Вы ввели не трёхзначное число";
@@ -82,7 +84,7 @@ namespace ThreeDigit
             }
             if (Conv3hNumToRom.Hundreds(str[0]) == 0)
             {
-                Rim.Text = "Ошибка в первой части числа";
+                Rim.Text = "Число должно начинаться с сотен";
                 return;
             }
             else value += Conv3hNumToRom.Hundreds(str[0]);
@@ -94,7 +96,7 @@ namespace ThreeDigit
                     {
                         if (0 == Conv3hNumToRom.Units(str[1]))
                         {
-                            Rim.Text = "Ошибка во второй части числа";
+                            Rim.Text = "После сотен должны идти десятки, начиная с двадцати, или  числа 10-19, или единицы";
                             return;
                         }
                         else value += Conv3hNumToRom.Units(str[1]);
@@ -108,12 +110,12 @@ namespace ThreeDigit
                 
                 if (0 == Conv3hNumToRom.Tens(str[1]))
                 {
-                    Rim.Text = "Ошибка во второй части числа";
+                    Rim.Text = "После сотен должны идти десятки, начиная с двадцати";
                     return;
                 } else value += Conv3hNumToRom.Tens(str[1]);
                 if (0 == Conv3hNumToRom.Units(str[2]))
                 {
-                    Rim.Text = "Ошибка в третьей части числа";
+                    Rim.Text = "После десяток должны идти единицы";
                     return;
                 }else value += Conv3hNumToRom.Units(str[2]);
              }

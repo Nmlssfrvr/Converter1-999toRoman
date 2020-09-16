@@ -1,0 +1,15 @@
+﻿<Window x:Class="ThreeDigit.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ThreeDigit"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button x:Name="Translate" Content="Перевести в римские цифры" HorizontalAlignment="Center" Height="60" Margin="0,157,0,0" VerticalAlignment="Top" Width="224" Click="Button_Click" FontSize="16"/>
+        <TextBox x:Name="Rus" HorizontalAlignment="Center" Height="75" Margin="0,50,0,0" Text="Впишите трехзначное число на русском языке" TextWrapping="Wrap" VerticalAlignment="Top" Width="496" FontSize="20" MouseEnter="Rus_MouseEnter" />
+        <TextBox x:Name="Rim" HorizontalAlignment="Center" Height="75" Margin="0,242,0,0" Text="Здесь будут римские цифры" TextWrapping="Wrap" VerticalAlignment="Top" Width="496" FontSize="20"/>
+
+    </Grid>
+</Window>

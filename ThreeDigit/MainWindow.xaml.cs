@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,7 @@ namespace ThreeDigit
             InitializeComponent();
             Rim.IsReadOnly = true;
         }
-        static class Conv3hNumToRom
+        static class ConvNumToRom
         {
             static Dictionary<int, string> ra = new Dictionary<int, string>
             { { 1000, "M" },  { 900, "CM" },  { 500, "D" },  { 400, "CD" },  { 100, "C" },
@@ -68,65 +69,86 @@ namespace ThreeDigit
             public static int Units(string s) => units
                 .Where(d => string.Equals(s, d.Value))
                 .Select(d => d.Key).FirstOrDefault();
+
+            public static IEnumerable<int> Searcher(List<string> str)
+            {
+                int i = 0;
+                foreach (var s in str)
+                {
+                    if (i > 3) yield break;
+                    if (Hundreds(s) != 0) yield return 100;
+                    else if (Tens(s) != 0) yield return 20;
+                    else if (Teens(s) != 0) yield return 10;
+                    else if (Units(s) != 0) yield return 1;
+                    else
+                    {
+                        yield return 0;
+                        yield break;
+                    }
+                    i++;
+                }
+            }
+            public static int Sorter(List<int> arr)
+            {
+                for (int i = 0; i < arr.Count-1; i++)
+                {
+                    if (arr[i] == 100 && arr[i + 1] == 100)
+                    {
+                        MessageBox.Show("Ошибка! После сотен не могут идти сотни");
+                        return 1;
+                    }                                                     
+                    if (arr[i] == 20 && arr[i + 1] != 1)
+                    {
+                        MessageBox.Show("Ошибка! После десяток могут идти только единицы");
+                        return 2;
+                    }
+                                                                           
+                    if (arr[i] == 10)
+                    {
+                        MessageBox.Show("Ошибка! После числе 10-19 не может идти число");
+                        return 3;
+                    }
+                                                                          
+                    if (arr[i] == 1)
+                    {
+                        MessageBox.Show("Ошибка! После единиц не может идти число");
+                        return 4;
+                    }                                                    
+                }
+                return 0;                                                           // OK
+            }
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             int value = 0;
-            Rim.Text = "";
             List<string> str = new List<string>();
             str.AddRange(Rus.Text.ToLower().Split(' '));
             while (str.Contains(""))
                 str.Remove("");
-            if (str.Count > 3)
+            if (str.Count == 0)
             {
-                Rim.Text = "Вы ввели не трёхзначное число";
+                MessageBox.Show("Вы ввели пустую строку");
                 return;
             }
-            if (Conv3hNumToRom.Hundreds(str[0]) == 0)
+            var arr = ConvNumToRom.Searcher(str).ToList();
+            if (arr.Contains(0))
             {
-                Rim.Text = "Число должно начинаться с сотен";
+                MessageBox.Show("Ошибка в слове " + str[arr.IndexOf(0)]);
                 return;
             }
-            else value += Conv3hNumToRom.Hundreds(str[0]);
-            if (str.Count == 2)
+            if (ConvNumToRom.Sorter(arr) == 0)
             {
-                if (0 == Conv3hNumToRom.Tens(str[1]))
+                for (int i=0; i< arr.Count;i++)
                 {
-                    if (0 == Conv3hNumToRom.Teens(str[1]))
-                    {
-                        if (0 == Conv3hNumToRom.Units(str[1]))
-                        {
-                            Rim.Text = "После сотен должны идти десятки, начиная с двадцати, или  числа 10-19, или единицы";
-                            return;
-                        }
-                        else value += Conv3hNumToRom.Units(str[1]);
-                    }
-                    else value += Conv3hNumToRom.Teens(str[1]);
-                }
-                else value += Conv3hNumToRom.Tens(str[1]);
-            } else
-            if (str.Count == 3)
-             {
+                    value += ConvNumToRom.Hundreds(str[i]);
+                    value += ConvNumToRom.Tens(str[i]);
+                    value += ConvNumToRom.Teens(str[i]);
+                    value += ConvNumToRom.Units(str[i]);
+                }   
+                Rim.Text = ConvNumToRom.ToRoman(value);
+            }
                 
-                if (0 == Conv3hNumToRom.Tens(str[1]))
-                {
-                    Rim.Text = "После сотен должны идти десятки, начиная с двадцати";
-                    return;
-                } else value += Conv3hNumToRom.Tens(str[1]);
-                if (0 == Conv3hNumToRom.Units(str[2]))
-                {
-                    Rim.Text = "После десяток должны идти единицы";
-                    return;
-                }else value += Conv3hNumToRom.Units(str[2]);
-             }
-            Rim.Text = Conv3hNumToRom.ToRoman(value);
 
-        }
-            private void Rus_MouseEnter(object sender, MouseEventArgs e)
-        {
-            
-            if (string.Equals(Rus.Text, "Впишите трехзначное число на русском языке"))
-                Rus.Text = "";
         }
     }
 }

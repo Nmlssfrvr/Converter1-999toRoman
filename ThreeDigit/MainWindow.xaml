@@ -7,9 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="Translate" Content="Перевести в римские цифры" HorizontalAlignment="Center" Height="60" Margin="0,157,0,0" VerticalAlignment="Top" Width="224" Click="Button_Click" FontSize="16"/>
-        <TextBox x:Name="Rus" HorizontalAlignment="Center" Height="75" Margin="0,50,0,0" Text="Впишите трехзначное число на русском языке" TextWrapping="Wrap" VerticalAlignment="Top" Width="496" FontSize="20" MouseEnter="Rus_MouseEnter" />
-        <TextBox x:Name="Rim" HorizontalAlignment="Center" Height="75" Margin="0,242,0,0" Text="Здесь будут римские цифры" TextWrapping="Wrap" VerticalAlignment="Top" Width="496" FontSize="20"/>
+        <Button x:Name="Translate" Content="Перевести в римские цифры" HorizontalAlignment="Center" Height="60" VerticalAlignment="Center" Width="224" Click="Button_Click" FontSize="16"/>
+        <TextBox x:Name="Rus" HorizontalAlignment="Center" Height="75" Margin="0,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="496" FontSize="20"  />
+        <TextBox x:Name="Rim" HorizontalAlignment="Center" Height="75" Margin="0,284,0,0" Text="Здесь будут римские цифры" TextWrapping="Wrap" VerticalAlignment="Top" Width="496" FontSize="20"/>
+        <Label Content="Впишите в поле ниже число от 1 до 999 на русском языке" HorizontalAlignment="Center" Height="36" Margin="0,46,0,0" VerticalAlignment="Top" Width="496" FontSize="18"/>
 
     </Grid>
 </Window>

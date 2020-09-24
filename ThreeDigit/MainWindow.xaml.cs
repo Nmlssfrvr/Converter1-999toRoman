@@ -128,12 +128,14 @@ namespace ThreeDigit
             if (str.Count == 0)
             {
                 MessageBox.Show("Вы ввели пустую строку");
+                Rim.Text = "Ошибка, попробуйте ещё раз";
                 return;
             }
             var arr = ConvNumToRom.Searcher(str).ToList();
             if (arr.Contains(0))
             {
                 MessageBox.Show("Ошибка в слове " + str[arr.IndexOf(0)]);
+                Rim.Text = "Ошибка, попробуйте ещё раз";
                 return;
             }
             if (ConvNumToRom.Sorter(arr) == 0)
@@ -146,8 +148,9 @@ namespace ThreeDigit
                     value += ConvNumToRom.Units(str[i]);
                 }   
                 Rim.Text = ConvNumToRom.ToRoman(value);
+                return;
             }
-                
+            Rim.Text = "Ошибка, попробуйте ещё раз";
 
         }
     }

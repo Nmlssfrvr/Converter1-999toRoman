@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\79154\\.nuget\\packages\\": {}
+    "C:\\Users\\78915\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
@@ -16,11 +17,14 @@
       "projectUniqueName": "B:\\Visual Studio Community 2019\\repos\\ThreeDigit\\ThreeDigit.csproj",
       "projectName": "ThreeDigit",
       "projectPath": "B:\\Visual Studio Community 2019\\repos\\ThreeDigit\\ThreeDigit.csproj",
-      "packagesPath": "C:\\Users\\79154\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\78915\\.nuget\\packages\\",
       "outputPath": "B:\\Visual Studio Community 2019\\repos\\ThreeDigit\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\79154\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\78915\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
